@@ -125,7 +125,7 @@ df["progressivo"] = (
 # Plot (MENOR)
 # ==========================
 pitch = Pitch(pitch_type='statsbomb', pitch_color='#ffffff', line_color='#c7d5dd')
-fig, ax = pitch.draw(figsize=(8, 5))  # reduzido
+fig, ax = pitch.draw(figsize=(10, 5.5))  # reduzido
 
 for _, row in df.iterrows():
     if row["errado"]:
