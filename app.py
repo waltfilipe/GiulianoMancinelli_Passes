@@ -161,11 +161,9 @@ pitch.arrows(50, 85, 70, 85, color='#4a4a4a', width=1.5,
 ax.text(60, 88, 'ATTACK DIRECTION', color='#4a4a4a',
         va='center', ha='center', fontsize=8, fontweight='bold', alpha=0.8)
 
-plt.title("Mapa de Passes - Critério Opta Progressive", fontsize=13, pad=15)
+plt.title("Pass Map", fontsize=13, pad=15)
 
 # largura ~850px
-st.set_page_config(layout="wide")
-fig, ax = pitch.draw(figsize=(10, 6))
 st.pyplot(fig, use_container_width=True)
 
 # ==========================
