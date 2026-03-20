@@ -128,6 +128,9 @@ df["progressivo"] = (
 pitch = Pitch(pitch_type='statsbomb', pitch_color='#ffffff', line_color='#c7d5dd')
 fig, ax = pitch.draw(figsize=(10, 5.5))  # reduzido
 
+# 🔹 LINHA DO TERÇO FINAL
+ax.axvline(x=80, color='#f1c40f', linestyle='--', linewidth=1, alpha=0.3)
+
 for _, row in df.iterrows():
     if row["errado"]:
         color = '#e74c3c'
