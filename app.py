@@ -169,7 +169,7 @@ buf = BytesIO()
 fig.savefig(buf, format="png", dpi=100, bbox_inches='tight')
 buf.seek(0)
 
-st.image(buf, width=850)
+st.image(buf, width=1000)
 
 # ==========================
 # Estatísticas
