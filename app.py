@@ -171,19 +171,34 @@ buf.seek(0)
 
 st.image(buf, width=1000)
 
-# ==========================
-# Estatísticas
-# ==========================
 st.markdown("---")
 
+# ==========================
+# Cálculos automáticos
+# ==========================
+total_passes = len(df)
+completed_passes = len(df[~df["errado"]])
+accuracy = completed_passes / total_passes * 100
+
+progressive_passes = len(df[df["progressivo"]])
+progressive_completed = len(df[(df["progressivo"]) & (~df["errado"])])
+
+# ==========================
+# Layout
+# ==========================
 col1, col2, col3 = st.columns(3)
 
-col1.metric("PASSES", "69", "57 (82.6%)")
-col2.metric("PROGRESSIVE", "11", "3 (27.3%)")
-col3.metric("LONG PASSES", "12", "4 (33.3%)")
+col1.metric(
+    "PASSES",
+    f"{completed_passes}/{total_passes}",
+    f"{accuracy:.1f}%"
+)
 
-col4, col5, col6 = st.columns(3)
+col2.metric(
+    "PROGRESSIVOS",
+    f"{progressive_completed}/{progressive_passes}" if progressive_passes > 0 else "0/0",
+    f"{(progressive_completed / progressive_passes * 100):.1f}%" if progressive_passes > 0 else "0%"
+)
 
-col4.metric("FINAL THIRD", "13", "5 (38.5%)")
-col5.metric("OWN FIELD", "49", "45 (91.8%)")
-col6.metric("OPP FIELD", "20", "12 (60.0%)")
+# exemplo mantendo outras stats
+col3.metric("LONGOS", "4/12", "33.3%")
