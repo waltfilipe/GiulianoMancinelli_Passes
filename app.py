@@ -220,6 +220,3 @@ col6.metric(
     "12 / 20",
     "60.0%"
 )
-
-# exemplo mantendo outras stats
-col3.metric("LONGOS", "4/12", "33.3%")
