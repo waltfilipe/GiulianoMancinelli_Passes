@@ -4,6 +4,7 @@ from mplsoccer import Pitch
 import pandas as pd
 import numpy as np
 from matplotlib.lines import Line2D
+from io import BytesIO
 
 # ==========================
 # CONFIG
@@ -164,7 +165,11 @@ ax.text(60, 88, 'ATTACK DIRECTION', color='#4a4a4a',
 plt.title("Pass Map", fontsize=13, pad=15)
 
 # largura ~850px
-st.pyplot(fig, use_container_width=True)
+buf = BytesIO()
+fig.savefig(buf, format="png", dpi=100, bbox_inches='tight')
+buf.seek(0)
+
+st.image(buf, width=850)
 
 # ==========================
 # Estatísticas
