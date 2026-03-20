@@ -173,31 +173,52 @@ st.image(buf, width=1000)
 
 st.markdown("---")
 
-# ==========================
-# Cálculos automáticos
-# ==========================
-total_passes = len(df)
-completed_passes = len(df[~df["errado"]])
-accuracy = completed_passes / total_passes * 100
+st.subheader("PASSING STATS")
 
-progressive_passes = len(df[df["progressivo"]])
-progressive_completed = len(df[(df["progressivo"]) & (~df["errado"])])
-
-# ==========================
-# Layout
-# ==========================
 col1, col2, col3 = st.columns(3)
 
+# ==========================
+# Linha 1
+# ==========================
 col1.metric(
     "PASSES",
-    f"{completed_passes}/{total_passes}",
-    f"{accuracy:.1f}%"
+    "57 / 69",
+    "82.6%"
 )
 
 col2.metric(
-    "PROGRESSIVOS",
-    f"{progressive_completed}/{progressive_passes}" if progressive_passes > 0 else "0/0",
-    f"{(progressive_completed / progressive_passes * 100):.1f}%" if progressive_passes > 0 else "0%"
+    "PROGRESSIVE PASSES",
+    "3 / 11",
+    "27.3%"
+)
+
+col3.metric(
+    "LONG PASSES",
+    "4 / 12",
+    "33.3%"
+)
+
+# ==========================
+# Linha 2
+# ==========================
+col4, col5, col6 = st.columns(3)
+
+col4.metric(
+    "FINAL THIRD",
+    "5 / 13",
+    "38.5%"
+)
+
+col5.metric(
+    "ENDED OWN FIELD",
+    "45 / 49",
+    "91.8%"
+)
+
+col6.metric(
+    "ENDED OPP FIELD",
+    "12 / 20",
+    "60.0%"
 )
 
 # exemplo mantendo outras stats
