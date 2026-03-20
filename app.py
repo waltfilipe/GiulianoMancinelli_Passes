@@ -5,7 +5,10 @@ import pandas as pd
 import numpy as np
 from matplotlib.lines import Line2D
 
-st.set_page_config(layout="wide")
+# ==========================
+# CONFIG
+# ==========================
+st.set_page_config(layout="centered")
 
 st.title("Mapa de Passes - Critério Opta Progressive")
 
@@ -13,7 +16,6 @@ st.title("Mapa de Passes - Critério Opta Progressive")
 # Coordenadas
 # ==========================
 cords = [
-    # PRIMEIRO TEMPO
     (25.76, 49.31), (29.75, 74.08),
     (13.45, 56.79), (18.11, 30.36),
     (59.50, 58.29), (75.13, 75.24),
@@ -61,7 +63,6 @@ cords = [
     (41.88, 58.62), (46.04, 40.83),
     (46.87, 53.80), (72.97, 71.92),
 
-    # SEGUNDO TEMPO
     (40.72, 47.98), (43.38, 66.60),
     (20.10, 54.63), (43.04, 55.13),
     (15.95, 56.29), (16.45, 28.86),
@@ -121,10 +122,10 @@ df["progressivo"] = (
 )
 
 # ==========================
-# Plot
+# Plot (MENOR)
 # ==========================
 pitch = Pitch(pitch_type='statsbomb', pitch_color='#ffffff', line_color='#c7d5dd')
-fig, ax = pitch.draw(figsize=(12, 8))
+fig, ax = pitch.draw(figsize=(8, 5))  # reduzido
 
 for _, row in df.iterrows():
     if row["errado"]:
@@ -150,26 +151,34 @@ legend_elements = [
     Line2D([0], [0], color=(0.9, 0.1, 0.1, 0.7), lw=2, label='Unsuccessful Passes')
 ]
 
-ax.legend(
-    handles=legend_elements, 
-    loc='upper left', 
-    fontsize=10, 
-    frameon=True, 
-    facecolor='#ffffff', 
-    edgecolor='#cccccc', 
-    shadow=True,
-    bbox_to_anchor=(0.01, 0.99)
-)
+ax.legend(handles=legend_elements, loc='upper left', fontsize=9,
+          frameon=True, facecolor='#ffffff', edgecolor='#cccccc',
+          shadow=True, bbox_to_anchor=(0.01, 0.99))
 
-pitch.arrows(50, 85, 70, 85, color='#4a4a4a', width=1.5, 
+pitch.arrows(50, 85, 70, 85, color='#4a4a4a', width=1.5,
              headwidth=4, headlength=5, ax=ax, clip_on=False)
 
-ax.text(60, 88, 'ATTACK DIRECTION', color='#4a4a4a', 
-        va='center', ha='center', fontsize=9, fontweight='bold', alpha=0.8)
+ax.text(60, 88, 'ATTACK DIRECTION', color='#4a4a4a',
+        va='center', ha='center', fontsize=8, fontweight='bold', alpha=0.8)
 
-plt.title("Mapa de Passes - Critério Opta Progressive", fontsize=15, pad=20)
+plt.title("Mapa de Passes - Critério Opta Progressive", fontsize=13, pad=15)
+
+# largura ~850px
+st.pyplot(fig, use_container_width=False)
 
 # ==========================
-# Streamlit render
+# Estatísticas
 # ==========================
-st.pyplot(fig)
+st.markdown("---")
+
+col1, col2, col3 = st.columns(3)
+
+col1.metric("PASSES", "69", "57 (82.6%)")
+col2.metric("PROGRESSIVE", "11", "3 (27.3%)")
+col3.metric("LONG PASSES", "12", "4 (33.3%)")
+
+col4, col5, col6 = st.columns(3)
+
+col4.metric("FINAL THIRD", "13", "5 (38.5%)")
+col5.metric("OWN FIELD", "49", "45 (91.8%)")
+col6.metric("OPP FIELD", "20", "12 (60.0%)")
