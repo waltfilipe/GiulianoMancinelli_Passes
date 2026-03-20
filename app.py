@@ -10,7 +10,7 @@ from matplotlib.lines import Line2D
 # ==========================
 st.set_page_config(layout="centered")
 
-st.title("Mapa de Passes - Critério Opta Progressive")
+st.title("Pass Map")
 
 # ==========================
 # Coordenadas
@@ -164,7 +164,9 @@ ax.text(60, 88, 'ATTACK DIRECTION', color='#4a4a4a',
 plt.title("Mapa de Passes - Critério Opta Progressive", fontsize=13, pad=15)
 
 # largura ~850px
-st.pyplot(fig, use_container_width=False)
+st.set_page_config(layout="wide")
+fig, ax = pitch.draw(figsize=(10, 6))
+st.pyplot(fig, use_container_width=True)
 
 # ==========================
 # Estatísticas
